@@ -1,0 +1,7 @@
+- Needs to be platform independent
+   - #ifdef _WIN32, #ifdef __unix
+   - Needs to be able to load from either .so or .dll file
+   - Needs to be able to see all the classes exposed by the .dll or .so. MUST NOT NEED TO TAKE INPUT TO FIND THE EXPOSED FUNCTIONS
+      - to make it easier just expose a function that gives a pointer to the plugin???
+      - Can return a list or vector of plugins (preferably make it templated, so user can say they want it implemented as a vector or a list)
+      - Use object oriented style - pluginLoader class, etc.
