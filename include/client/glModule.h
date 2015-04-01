@@ -3,6 +3,10 @@
 
 #include <string>
 
+/* Simple API that will allow us to retrieve the  
+ * modules from the shared library via pointer.
+ * This opacity is safer.
+ */
 #define EXPORT_MODULE(module) \
     extern "C" glModule *export_##module() { return new module(#module); }
 #define OBTAIN_MODULE(module) ("export_" + module)
@@ -16,11 +20,14 @@
 #endif
 
 class glModule {
-    public:
-        glModule(const char *name)
-            : _module_name(name) {}
-        virtual ~glModule() {}
-        virtual void startup() { /* entering */ }
-        virtual void cleanup() { /* exiting */ }
-        /* TODO: implement inhouse logging system */
+public:
+    glModule(const char *name)
+        : _module_name(name) {}
+    virtual ~glModule() {}
+    virtual void startup() { /* entering */ }
+    virtual void cleanup() { /* exiting  */ }
+private:
+    std::string _module_name;
 };
+
+#endif

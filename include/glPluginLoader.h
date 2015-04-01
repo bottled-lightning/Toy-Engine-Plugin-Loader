@@ -1,22 +1,25 @@
-#include "glModule.h"
+#ifndef GLPLUGINLOADER_H_
+#define GLPLUGINLOADER_H_
 
-#include <iostream>
-#include <sstream>
-#include <memory>
+class glModule;
+
+#include <boost/program_options.hpp>
 #include <vector>
 #include <string>
 
-#ifdef _WIN32
-#   define WIN32_LEAN_AND_MEAN
-#   include <windows.h>
-#elif __unix
-#   include <dlfcn.h>
-#endif
-
-class glPluginLoader.h {
-    public:
-        std::vector<glModule*> loadModules(const std::string &modules_ini_path,
-                                           boost::program_options::variables_map &vm);
-        void deleteModules(std::vector<glModule*> &modules);
-    private:
+template <template <typename, typename> class T>
+class glPluginLoader {
+public:
+    typedef T<glModule *, std::allocator<glModule *>> containerT;
+    
+    // Calls each plugin's startup functions
+    containerT loadModules(const std::string &modules_ini_path,
+                           boost::program_options::variables_map &vm);
+    // We call each plugin's individual cleanup functions
+    // for client-side safety when working with modules.
+    void deleteModules(containerT &modules);
+private:
+    containerT modules;
 };
+
+#endif
