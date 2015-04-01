@@ -26,6 +26,9 @@ public:
     virtual ~glModule() {}
     virtual void startup() { /* entering */ }
     virtual void cleanup() { /* exiting  */ }
+    
+    const std::string &getName();
+
 private:
     std::string _module_name;
 };
