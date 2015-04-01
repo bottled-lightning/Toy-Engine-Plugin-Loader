@@ -10,11 +10,8 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.54 COMPONENTS REQUIRED program_options)
 
-include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${pluginLoader_SOURCE_DIR}/include)
 
-add_library(${CMAKE_PROJECT_NAME}
+add_library(pluginLoader
   src/glPluginLoader.cpp  
 )
-
-target_link_libraries(${CMAKE_PROJECT_NAME} ${Boost_LIBRARIES})
