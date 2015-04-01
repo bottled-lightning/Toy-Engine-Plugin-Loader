@@ -28,7 +28,7 @@ public:
     virtual void startup() { /* entering */ }
     virtual void cleanup() { /* exiting  */ }
     
-    const std::string &getName();
+    const std::string &getName() const { return _module_name; }
 
 private:
     std::string _module_name;
