@@ -9,6 +9,7 @@
  */
 #define EXPORT_MODULE(module) \
     extern "C" glModule *export_##module() { return new module(#module); }
+// note: module argument is a string
 #define OBTAIN_MODULE(module) ("export_" + module)
 
 #ifdef _WIN32
@@ -16,7 +17,7 @@
     extern "C" __declspec(dllexport) glModule * __cdecl export_##module();
 #elif __unix
 #define DEFINE_MODULE(module) \
-    extern "C" extern glModule *export_##module();
+    extern "C" glModule *export_##module();
 #endif
 
 class glModule {
