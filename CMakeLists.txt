@@ -13,5 +13,6 @@ find_package(Boost 1.54 COMPONENTS REQUIRED program_options)
 include_directories(${pluginLoader_SOURCE_DIR}/include)
 
 add_library(pluginLoader
-  src/glPluginLoader.cpp  
+  src/glPluginLoader.cpp
+  ${backward_ENABLE}
 )
